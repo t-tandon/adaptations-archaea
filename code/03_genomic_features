@@ -1,0 +1,10 @@
+# july 15
+
+## Genome Size
+#Estimate with GTDB metadata file (contains checkm2 completeness) 
+#formula = assembly length / completeness
+
+
+
+
+#Estimated via micomplete #use caution: trained on bacterial genomes
