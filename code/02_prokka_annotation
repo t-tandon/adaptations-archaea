@@ -20,6 +20,7 @@ done
 #.gff = annotation file
 #.tsv = feature table (gene types, lengths, etc.) 
 
+# july 14
 
 for f in ../ncbi_dataset/data/*/*.fna; do 
   #clean name
