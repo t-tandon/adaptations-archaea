@@ -20,14 +20,12 @@ done
 #.gff = annotation file
 #.tsv = feature table (gene types, lengths, etc.) 
 
-# july 14
+# july 14/15
 
 for f in ../ncbi_dataset/data/*/*.fna; do 
   #clean name
-  filename=$(basename "$f"); 
-  filename="${filename/_genomic.fna/}"; 
-  name="${filename}"; 
-  outdir="prokka_${name}"; 
+  base_name=$(basename "$fna_file" _genomic.fna);  
+  outdir="prokka_${base_name}";
   
   #prokka annotation
   prokka_ed -o "$outdir" --prefix "$name" --locustag "$name" --kingdom Archaea --cpus 32 "$f"; #on a 64 cpu core server
@@ -35,7 +33,3 @@ for f in ../ncbi_dataset/data/*/*.fna; do
   #remove other files
   find "$outdir" -type f ! \( -name "*.gbk" -o -name "*.gff" -o -name "*.faa" -o -name "*.tsv" \) -delete; 
 done
-
-
-
-
