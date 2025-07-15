@@ -1,0 +1,37 @@
+## july 10
+## Downloading representative genomes
+mkdir data
+cd data
+cp ../GTDB-Archaea-domain-GTDB-rep-metadata.tsv.complete.c90 .
+## Task: Pick one genome per (taxon) with highest completeness and lowest contamination. 
+## 1.	Find the number of relevant columns
+head -n 1 GTDB-Archaea-domain-GTDB-rep-metadata.tsv.complete.c90 | tr '\t' '\n' | nl
+##1	accession
+#2	domain
+#3	phylum
+#7	genus
+#9	ambiguous_bases
+#10	checkm2_completeness
+#11	checkm2_contamination
+  
+## sort by genus
+sort -t$'\t' -k7,7 -k10,10nr -k11,11n GTDB-Archaea-domain-GTDB-rep-metadata.tsv.complete.c90 > archaea_sorted.tsv
+
+## select first genome per genus
+awk -F'\t' '!seen[$7]++' archaea_sorted.tsv > archaea_repr.tsv
+
+## check number of representative genomes
+wc -l archaea_repr.tsv
+#881 archaea_repr.tsv
+
+## extract accession ids
+cut -f1 archaea_repr.tsv > archaea_acc.txt
+
+## remove prefixes
+cut -d'_' -f2,3 archaea_acc.txt > archaea_repr_acc.txt
+#inspect and clean file with nano (880 accs excluding header) 
+
+## download genomes
+datasets download genome accession --inputfile archaea_repr_acc.txt --filename archaea_genomes.zip
+unzip archaea_genomes.zip
+#gives ncbi_dataset, move to main folder
