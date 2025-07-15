@@ -8,10 +8,8 @@
 df["correct_genome_size"] = df["genome_size"] / (df["checkm2_completeness"]/100) 
 ```
 
-#Better estimated via micomplete #caution: trained majorly on bacterial genomes
-#source: https://github.com/EricHugo/miComplete
-#download with `pip install micomplete`
-#input = .faa files
+## Gene density
+# formula = number of predicted protein-coding genes(CDS) / genome size
 
 
 
