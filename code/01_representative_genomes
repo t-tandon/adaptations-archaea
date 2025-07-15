@@ -35,3 +35,8 @@ cut -d'_' -f2,3 archaea_acc.txt > archaea_repr_acc.txt
 datasets download genome accession --inputfile archaea_repr_acc.txt --filename archaea_genomes.zip
 unzip archaea_genomes.zip
 #gives ncbi_dataset, move to main folder
+
+
+
+## july 15
+Repeated with custom python script with jupyter notebook (822 total genomes) 
