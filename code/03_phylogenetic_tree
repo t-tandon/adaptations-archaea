@@ -1,0 +1,13 @@
+#new folder
+mkdir phylo_tree
+
+# create file list w paths to .faa files
+find ../prokka_out/prokka_GC* -name "*.faa" > archaeal_faa_list.txt
+
+# download archaea hmm set
+wget https://zenodo.org/records/13858489/files/Archaea.hmm?download=1
+mv Archaea.hmm?download=1 Archaea.hmm #easier to recognize
+
+# run gtotree
+GToTree -f archaeal_faa_list.txt -H Archaea.hmm -j 32 -o archaeal_tree
+
