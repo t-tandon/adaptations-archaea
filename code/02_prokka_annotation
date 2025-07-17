@@ -33,3 +33,23 @@ for f in ../ncbi_dataset/data/*/*.fna; do
   #remove other files
   find "$outdir" -type f ! \( -name "*.gbk" -o -name "*.gff" -o -name "*.faa" -o -name "*.tsv" \) -delete; 
 done
+
+## july 17
+#better way to run for downstream gototree
+
+#create mapfile to link genus to acc_id
+cut -f1,7 archaea_representatives.tsv > acc_genus.tsv
+sed -E 's/^(RS_|GB_)//' acc_genus.tsv > mapfile.tsv
+
+mapfile="../mapfile.tsv"
+input="../ncbi_dataset/data/*/*.fna"
+
+for f in $input; do 
+  acc=$(basename "$f" _genomic.fna | cut -d'_' -f1,2); 
+  genus=$(grep -w "$acc" "$mapfile" | cut -f2); 
+  prefix="${genus}_${acc}"; 
+  outdir="prokka_${prefix}"; 
+  prokka_ed --outdir "$outdir" --prefix "$prefix" --locustag "$prefix" --kingdom Archaea --cpus 32 "$f"; 
+  find "$outdir" -type f ! \( -name "*.gbk" -o -name "*.gff" -o -name "*.faa" -o -name "*.tsv" \) -delete; 
+done
+
