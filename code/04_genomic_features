@@ -8,6 +8,16 @@
 df["correct_genome_size"] = df["genome_size"] / (df["checkm2_completeness"]/100) 
 ```
 
+## alternatively, run micomplete (model trained on marker genes) 
+#full file paths to .fna genomes
+find $(pwd)/genomes -name "*.fna" | awk '{print $0 "\tfna"}' > archaea_genomes.tab
+
+#create new directory
+mkdir micomplete_out
+
+#run micomplete on default hmm set Arch131
+miComplete "../archaea_genomes.tab" --hmms Arch131 --weights Arch131 --threads 5 > micomplete_results.tsv
+
 ## Gene density
 # formula = number of predicted protein-coding genes(CDS) / genome size
 
