@@ -8,7 +8,7 @@
 df["correct_genome_size"] = df["genome_size"] / (df["checkm2_completeness"]/100) 
 ```
 
-## alternatively, run micomplete (model trained on marker genes) 
+## alternatively, run micomplete #trained on reference marker genes
 #full file paths to .fna genomes
 find $(pwd)/genomes -name "*.fna" | awk '{print $0 "\tfna"}' > archaea_genomes.tab
 
