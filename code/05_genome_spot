@@ -1,0 +1,17 @@
+#create new directory
+mkdir genomespot_out
+
+#activate python environment
+python 3.11
+
+#run genomespot
+for faa in ../prokka_out/prokka_*/*faa; do \
+  accession=$(basename "$faa" .faa | grep -o 'GCA_[0-9]\+'); 
+  fna=$(find ../ncbi_dataset/data -type f -name "${accession}*.fna" | head -n 1); 
+  python -m genome_spot.genome_spot \
+   --models "$MODEL_DIR" \
+   --contigs "$fna" \
+   --proteins "$faa" \ 
+  --output "$accession.genomespot"; 
+done
+
