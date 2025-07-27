@@ -18,3 +18,26 @@ for faa in ../prokka_out/prokka_*/*faa; do \
   --output "$accession.genomespot"; 
 done
 
+## july 27th 
+
+#only got 641 output with 822 files. so .fna and .faa files either did not match properly or there is some issue. 
+#inspection of the prokka folder revealed GCF_ files were skipped during search because the code does not include them. 
+
+#better to run again with just GCF rather the whole thing
+
+#create new directory
+mkdir genomespot_out
+
+#activate python environment
+python3.11
+
+#run genomespot
+for faa in ../prokka_out/prokka_*/*faa; do \
+  accession=$(basename "$faa" .faa | grep -o 'GCF_[0-9]\+'); 
+  fna=$(find ../ncbi_dataset/data -type f -name "${accession}*.fna" | head -n 1); 
+  python -m genome_spot.genome_spot \
+   --models "$MODEL_DIR" \
+   --contigs "$fna" \
+   --proteins "$faa" \ 
+  --output "$accession.genomespot"; 
+done
