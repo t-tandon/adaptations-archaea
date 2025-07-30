@@ -1,14 +1,8 @@
 # july 15
 
-## Genome Size
-#estimate with checkm2 (stored in gtdb metadata) 
+## genome size
 #formula = assembly length / completeness fraction i.e. complete%/100 
-
-```python
-df["correct_genome_size"] = df["genome_size"] / (df["checkm2_completeness"]/100) 
-```
-
-## alternatively, run micomplete #trained on reference marker genes
+## run micomplete #trained on reference marker genes
 #full file paths to .fna genomes
 find $(pwd)/genomes -name "*.fna" | awk '{print $0 "\tfna"}' > archaea_genomes.tab
 
@@ -21,10 +15,19 @@ miComplete "../archaea_genomes.tab" --hmms Arch131 --weights Arch131 --threads 5
 
 ## Gene density
 # formula = number of predicted protein-coding genes(CDS) / genome size
+# calculated using micomplete output 
 
+# july 30
 
+## GC content
+#overall GC-content available as micomplete output
 
+## @3rd silent codon position (codonw) 
 
+#install codonw
+conda install -c bioconda codonw
+
+#codonw expects coding sequences as .ffn files (prokka output) 
 
 
 
