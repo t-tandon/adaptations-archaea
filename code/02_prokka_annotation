@@ -31,7 +31,7 @@ for f in ../ncbi_dataset/data/*/*.fna; do
   prokka_ed -o "$outdir" --prefix "$name" --locustag "$name" --kingdom Archaea --cpus 32 "$f"; #on a 64 cpu core server
 
   #remove other files
-  find "$outdir" -type f ! \( -name "*.gbk" -o -name "*.gff" -o -name "*.faa" -o -name "*.tsv" \) -delete; 
+  find "$outdir" -type f ! \( -name "*.gbk" -o -name "*.gff" -o -name "*.faa" -o -name "*.ffn" \) -delete; 
 done
 
 ## july 17
@@ -50,6 +50,6 @@ for f in $input; do
   prefix="${genus}_${acc}"; 
   outdir="prokka_${prefix}"; 
   prokka_ed --outdir "$outdir" --prefix "$prefix" --locustag "$prefix" --kingdom Archaea --cpus 32 "$f"; 
-  find "$outdir" -type f ! \( -name "*.gbk" -o -name "*.gff" -o -name "*.faa" -o -name "*.tsv" \) -delete; 
+  find "$outdir" -type f ! \( -name "*.gbk" -o -name "*.gff" -o -name "*.faa" -o -name "*.ffn" \) -delete; 
 done
 
