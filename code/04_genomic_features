@@ -28,7 +28,12 @@ miComplete "../archaea_genomes.tab" --hmms Arch131 --weights Arch131 --threads 5
 conda install -c bioconda codonw
 
 #codonw expects coding sequences as .ffn files (prokka output) 
-
+mkdir gc3_results
+for file in ../prokka_output/*/*ffn; do
+  base=$(basename "$file" .ffn)
+  codonw "$file" -all_indices -nomenu
+  mv "${base}.blk" "gc3_results/${base}_gc3.blk"; 
+done
 
 # august 9
 ## @tRNAs (tRNAscan-SE) 
