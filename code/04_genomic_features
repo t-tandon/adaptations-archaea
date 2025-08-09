@@ -30,4 +30,14 @@ conda install -c bioconda codonw
 #codonw expects coding sequences as .ffn files (prokka output) 
 
 
+# august 9
+## @tRNAs (tRNAscan-SE) 
+
+mkdir trnascan_out
+
+for file in ../ncbi_dataset/data/*/*fna; 
+do base=$(basename "$file" _genomic.fna); 
+acc=$(echo "$base" | cut -d'.' -f1-2 | cut -d'.' -f1); 
+tRNAscan-SE -o "${acc}_trna.txt" "$file"; done
+
 
