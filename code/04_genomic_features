@@ -43,7 +43,7 @@ mkdir gc3_results
 for file in ../ncbi_dataset/data/*/*fna; do
   base=$(basename "$file" _genomic.fna);
   acc=$(echo "$base" | cut -d'.' -f1-2 | cut -d'.' -f1);
-  prodigal -i "$file" -a "${acc}.faa" -d "${acc}_cds.ffn" -g 11 -c -m -f gff -o "${acc}_prodigal.gff"; 
+  prodigal -i "$file" -a "${acc}.faa" -d "${acc}_cds.ffn" -g 11 -c -m -f gff -o "${acc}_prodigal.gff"; #code 11 is bacterial/archaeal code
 done
 
 
