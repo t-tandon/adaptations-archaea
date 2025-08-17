@@ -1,5 +1,3 @@
-# july 15
-
 ## genome size
 #formula = assembly length / completeness fraction i.e. complete%/100 
 ## run micomplete #trained on reference marker genes
@@ -17,25 +15,9 @@ miComplete "../archaea_genomes.tab" --hmms Arch131 --weights Arch131 --threads 5
 # formula = number of predicted protein-coding genes(CDS) / genome size
 # calculated using micomplete output 
 
-# july 30
-
 ## GC content
 #overall GC-content available as micomplete output
 
-## @3rd silent codon position (codonw) 
-
-#install codonw
-conda install -c bioconda codonw
-
-#codonw expects coding sequences as .ffn files (prokka output) 
-mkdir gc3_results
-for file in ../prokka_output/*/*ffn; do
-  base=$(basename "$file" .ffn)
-  codonw "$file" -all_indices -nomenu
-  mv "${base}.blk" "gc3_results/${base}_gc3.blk"; 
-done
-
-# august 9
 ## @tRNAs (tRNAscan-SE) 
 
 mkdir trnascan_out
@@ -46,4 +28,29 @@ for file in ../ncbi_dataset/data/*/*fna; do
   tRNAscan-SE -A -a "${acc}_trna.fna" -o "${acc}_trna.txt" "$file"; 
 done
 
+### @3rd silent codon position (codonw) 
+
+#prokka tends to output incomplete .ffn files, which do not work for codonw
+#use prodigal and filter for complete sequences
+
+#install codonw
+conda install -c bioconda codonw
+
+#create directory
+mkdir gc3_results
+
+#run prodigal
+for file in ../ncbi_dataset/data/*/*fna; do
+  base=$(basename "$file" _genomic.fna);
+  acc=$(echo "$base" | cut -d'.' -f1-2 | cut -d'.' -f1);
+  prodigal -i "$file" -a "${acc}.faa" -d "${acc}_cds.ffn" -g 11 -c -m -f gff -o "${acc}_prodigal.gff"; 
+done
+
+
+#run codonw
+for file in ../prodigal_out/*ffn; do 
+  base=$(basename "$file" .ffn)
+  codonw "$file" -all_indices -nomenu
+  mv "${base}.blk" "gc3_results/${base}_gc3.blk"; 
+done
 
