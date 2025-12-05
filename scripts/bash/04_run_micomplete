@@ -1,0 +1,17 @@
+## run micomplete #trained on reference marker genes
+#full file paths to .fna genomes
+find $(pwd)/genomes -name "*.fna" | awk '{print $0 "\tfna"}' > archaea_genomes.tab
+
+#create new directory
+mkdir micomplete_out
+
+#run micomplete on default hmm set Arch131
+miComplete "../archaea_genomes.tab" --hmms Arch131 --weights Arch131 --threads 5 > micomplete_results.tsv
+#gives .tblout .progial.faa and results file
+
+## Gene density
+# formula = number of predicted protein-coding genes(CDS) / genome size
+# calculated using micomplete output 
+
+## GC content
+#overall GC-content available as micomplete output
