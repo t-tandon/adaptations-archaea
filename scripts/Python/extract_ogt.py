@@ -23,4 +23,7 @@ combined_df = pd.DataFrame(records)
 # reorder columns (accession first)
 combined_df = combined_df.set_index('accession').reset_index()
 
-combined_df.head()
+#extract OGT 
+columns = ["accession", "temperature_optimum"]
+spot_df = combined_df[columns] 
+spot_df.head()
