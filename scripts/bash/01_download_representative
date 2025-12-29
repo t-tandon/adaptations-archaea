@@ -1,37 +1,89 @@
+#make directory
 mkdir data
 cd data
-cp ../GTDB-Archaea-domain-GTDB-rep-metadata.tsv.complete.c90 .
+
+#get latest gtdb metadata for archaea
+wget https://data.gtdb.aau.ecogenomic.org/releases/latest/ar53_metadata.tsv.gz
 
 ## Task: Pick one genome per (taxon) with highest completeness and lowest contamination. 
 
-## 1.	Find the number of relevant columns
-head -n 1 GTDB-Archaea-domain-GTDB-rep-metadata.tsv.complete.c90 | tr '\t' '\n' | nl
-##1	accession
-#2	domain
-#3	phylum
-#7	genus
-#9	ambiguous_bases
-#10	checkm2_completeness
-#11	checkm2_contamination
-  
-## sort by genus
-sort -t$'\t' -k7,7 -k10,10nr -k11,11n GTDB-Archaea-domain-GTDB-rep-metadata.tsv.complete.c90 > archaea_sorted.tsv
+## 1. find the number of relevant columns
+head -n 1 ar53_metadata.tsv | tr '\t' '\n' | nl
 
-## select first genome per genus
-awk -F'\t' '!seen[$7]++' archaea_sorted.tsv > archaea_repr.tsv
+#2. filter for good quality
+awk -F'\t' 'NR==1 || ($3>=90 && $4<=5)' ar53_metadata.tsv > ar53_metadata.complete.c90.tsv 
+#$3 = checkm2_completeness
+#$4 = checkm2_contamination 
 
-## check number of representative genomes
-wc -l archaea_repr.tsv
-#881 archaea_repr.tsv
+#3. add species to last column
 
-## extract accession ids
-cut -f1 archaea_repr.tsv > archaea_acc.txt
+awk -F'\t' 'BEGIN{OFS="\t"}
+NR==1 {
+  print $0, "species"
+  next
+}
+{
+  split($20, tax, ";")
+  sp = "NA"
+  for (i in tax) {
+    if (tax[i] ~ /^s__/) {
+      sp = substr(tax[i], 4)
+    }
+  }
+  print $0, sp
+}' ar53_metadata.complete.c90.tsv  > ar53_with_species.tsv
 
-## remove prefixes
-cut -d'_' -f2,3 archaea_acc.txt > archaea_repr_acc.txt
-#inspect and clean file with nano (880 accs excluding header) 
+
+#sort by species (best genome first) 
+sort -t$'\t' -k78,78 -k3,3nr -k4,4n ar53_with_species.tsv > archaea_sorted_species.tsv
+
+#pick representative genome per species
+#make directory
+mkdir data
+cd data
+
+#get latest gtdb metadata for archaea
+wget https://data.gtdb.aau.ecogenomic.org/releases/latest/ar53_metadata.tsv.gz
+
+## Task: Pick one genome per (taxon) with highest completeness and lowest contamination. 
+
+## find the number of relevant columns
+head -n 1 ar53_metadata.tsv | tr '\t' '\n' | nl
+
+## filter for good quality
+awk -F'\t' 'NR==1 || ($3>=90 && $4<=5)' ar53_metadata.tsv > ar53_metadata.complete.c90.tsv 
+  #$3 = checkm2_completeness
+  #$4 = checkm2_contamination 
+
+## add species to last column (114) 
+awk -F'\t' 'BEGIN{OFS="\t"}
+NR==1 {print $0, "species"
+next
+}
+{split($20, tax, ";")
+  sp = "NA"
+  for (i in tax) {
+    if (tax[i] ~ /^s__/) {
+      sp = substr(tax[i], 4)}}
+  print $0, sp}' ar53_metadata.complete.c90.tsv  > ar53_with_species.tsv
+
+#sort by species (best genome first) 
+sort -t$'\t' -k114,114 -k3,3nr -k4,4n ar53_with_species.tsv > archaea_sorted_species.tsv
+
+#pick representative genome per species
+awk -F'\t' 'NR==1 || !seen[$114]++' archaea_sorted_species.tsv > archaea_repr.tsv
+
+# gives 3442 archaea_repr.tsv
+
+## extract accession ids and remove prefixes 
+cut -f1 archaea_repr.tsv | tail -n +2 | cut -d'_' -f2,3 > archaea_repr_acc.txt
+
+#ensure header is removed
+grep -vi '^accession$' archaea_repr_acc.txt > archaea_repr_acc.clean.txt
+mv archaea_repr_acc.clean.txt archaea_repr_acc.txt
 
 ## download genomes
 datasets download genome accession --inputfile archaea_repr_acc.txt --filename archaea_genomes.zip
+
 unzip archaea_genomes.zip
 #gives ncbi_dataset, move to main folder
