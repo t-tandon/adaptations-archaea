@@ -34,7 +34,7 @@ sort -t$'\t' -k114,114 -k3,3nr -k4,4n ar53_with_species.tsv > archaea_sorted_spe
 #pick representative genome per species
 awk -F'\t' 'NR==1 || !seen[$114]++' archaea_sorted_species.tsv > archaea_repr.tsv
 
-# gives 3442 archaea_repr.tsv
+# gives 3444 archaea_repr.tsv
 
 ## extract accession ids and remove prefixes 
 cut -f1 archaea_repr.tsv | tail -n +2 | cut -d'_' -f2,3 > archaea_repr_acc.txt
