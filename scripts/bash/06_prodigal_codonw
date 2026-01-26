@@ -25,14 +25,16 @@ done
   
 
 #install codonw
-conda install -c bioconda codonw
+conda create -n codonw_env -c bioconda codonw
+conda activate codonw_env
 
 #create directory
-mkdir gc3_results
+mkdir codonw_out
 
 #run codonw
-for file in ../prodigal_out/*ffn; do 
+ffns="../prodigal_out/*.ffn"
+for file in $ffns; do
   base=$(basename "$file" .ffn)
-  codonw "$file" -all_indices -nomenu
-  mv "${base}.blk" "gc3_results/${base}_gc3.blk"; 
+  out="${base}_codonw.out"
+  codonw "$file" -all_indices -nomenu > "$out"
 done
