@@ -3,13 +3,26 @@
 #prokka tends to output incomplete .ffn files, which do not work for codonw
 #use prodigal and filter for complete sequences
 
-#run prodigal
-for file in ../ncbi_dataset/data/*/*fna; do
-  base=$(basename "$file" _genomic.fna);
-  acc=$(echo "$base" | cut -d'.' -f1-2 | cut -d'.' -f1);
-  prodigal -i "$file" -a "${acc}.faa" -d "${acc}_cds.ffn" -g 11 -c -m -f gff -o "${acc}_prodigal.gff"; #code 11 is bacterial/archaeal code
-done
+#create clean environment
+conda create -n prodigal_env -c bioconda -c conda-forge prodigal
+conda activate prodigal_env
 
+
+genomes="../data/ncbi_dataset/data/*/*.fna"
+
+for file in $genomes; do
+  #extract accession 
+  acc=$(basename "$file" _genomic.fna)
+
+  #output files
+  faa="${acc}.faa"
+  ffn="${acc}_cds.ffn"
+  gff="${acc}_prodigal.gff"
+
+  #run prodigal
+  prodigal -i "$file" -a "$faa" -d "$ffn" -f gff -o "$gff" -g 11 -c -m
+done 
+  
 
 #install codonw
 conda install -c bioconda codonw
