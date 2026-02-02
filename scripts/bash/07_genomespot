@@ -16,4 +16,5 @@ for faa in prokka_output/prokka_*/*.faa; do
   accession=$(basename "$faa" | grep -oE 'GC[AF]_[0-9]+\.[0-9]+')
   fna=$(find Documents/data/ncbi_dataset/data -type f -name "${accession}*_genomic.fna" | head -n 1)
   python -m genome_spot.genome_spot --models "$MODEL_DIR" --contigs "$fna" --proteins "$faa" --output "genomespot_out/${accession}"
+done
 
