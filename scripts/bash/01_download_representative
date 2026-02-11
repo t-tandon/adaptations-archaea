@@ -43,6 +43,12 @@ awk -F'\t' 'NR==1 || !seen[$115]++' archaea_sorted_species.tsv > archaea_repr.ts
 
 # gives 3444 archaea_repr.tsv
 
+## create mapfile for downstream use
+awk -F'\t' 'BEGIN{OFS="\t"}
+NR==1 {print "accession", "phylum", "species"; next}
+{print $1, $(NF-1), $NF}' archaea_repr.tsv > archaea_taxonomy.tsv
+
+
 ## extract accession ids and remove prefixes 
 cut -f1 archaea_repr.tsv | tail -n +2 | cut -d'_' -f2,3 > archaea_repr_acc.txt
 
