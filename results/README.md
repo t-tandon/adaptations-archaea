@@ -22,12 +22,12 @@ Class-level analysis shows:
 
 | Trait               | Best Model | Key Parameter | Interpretation                             |
 | ------------------- | ---------- | ------------- | ------------------------------------------ |
-| OGT                 | λ          | λ ≈ 0.99      | Extremely strong phylogenetic signal       |
-| Genome size         | λ          | λ ≈ 0.88      | Strong phylogenetic structure              |
-| frac_ilvwygerkp     | δ          | δ ≈ 0.19      | Evolution concentrated toward deeper nodes |
-| GC content          | δ          | δ ≈ 0.71      | Moderately time-dependent evolution        |
+| OGT                 | λ          | λ ≈ 0.99      | Very strong phylogenetic signal       |
+| Genome size         | λ          | λ ≈ 0.88      | Strong phylogenetic signal             |
+| frac_ilvwygerkp     | δ          | δ ≈ 0.19      | Evolution in deeper nodes |
+| GC content          | δ          | δ ≈ 0.71      | Somewhat time-dependent evolution        |
 | ratio_charged_polar | EB         | a ≈ -0.92     | Early burst–like pattern                   |
-| trna_gc             | δ          | δ ≈ 0.028     | Strong early divergence                    |
+| trna_gc             | δ          | δ ≈ 0.028     | Early divergence                    |
 
 
 * **OGT is highly phylogenetically conserved** (λ ≈ 0.99).
