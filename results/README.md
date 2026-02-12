@@ -60,7 +60,7 @@ Across phyla with enough statistical power:
 * Genome size
 * Whole-genome GC content
 
-These variables sometimes show clade-specific and are not consistent predictors of thermophily.
+These variables sometimes show clade-specific patterns and are not consistent predictors of thermophily.
 
 
 ## 4. Per-Class Analysis
