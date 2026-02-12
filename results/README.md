@@ -6,15 +6,14 @@ Across major archaeal phyla:
 
 * **frac_ilvwygerkp** shows a strong positive relationship with OGT in nearly all clades.
 * **ratio_charged_polar** generally increases with OGT.
-* **tRNA GC content** shows a positive association in several thermophilic groups.
-* Whole-genome GC content and genome size show weaker or inconsistent trends.
+* **tRNA GC content** shows a positive association in many thermophilic groups.
+* Whole-genome GC content and genome size show weaker trends.
 
-
-Class-level stratification shows:
+Class-level analysis shows:
 
 * Strong clustering by class.
-* More modest or noisy patterns in small classes.
-* **frac_ilvwygerkp** still shows consistent pattern
+* More modest/noisy patterns in small classes.
+* **frac_ilvwygerkp** still gives consistent positive slopes
 
 ---
 
