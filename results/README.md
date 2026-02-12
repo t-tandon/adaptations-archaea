@@ -37,25 +37,23 @@ Class-level analysis shows:
 
 Across phyla with enough statistical power:
 
-### Universally Strong Predictor: 
-**frac_ilvwygerkp**
+### Universally Strong Predictor: **frac_ilvwygerkp**
 
 * Positive and highly significant in nearly every major phylum.
 * Represents hydrophobic and thermophily-enriched amino acids.
 
 ### Secondary Predictors
 
-**ratio_charged_polar**
+#### **ratio_charged_polar**
 
 * Frequently positive and significant.
 * Supports electrostatic stabilization mechanisms.
 
-**tRNA GC content**
+#### **tRNA GC content**
 
 * Significant in multiple thermophilic clades.
 * Likely contributes to RNA structural stability at high temperature.
 
----
 
 ### Weak or Inconsistent Predictors
 
@@ -64,7 +62,6 @@ Across phyla with enough statistical power:
 
 These variables sometimes show clade-specific and are not consistent predictors of thermophily.
 
----
 
 ## 4. Per-Class Analysis
 
@@ -74,7 +71,6 @@ At the class level:
 * Even with lower power, smaller classes show positive slopes
 Indicates that proteome composition is the main predictor of OGT. 
 
----
 
 
 
