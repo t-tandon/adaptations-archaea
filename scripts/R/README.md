@@ -4,7 +4,7 @@ This folder contains the R scripts used to perform phylogenetically informed reg
 
 The analysis was conducted **twice at different taxonomic resolutions**:
 
-* **Class-level representatives (~700 sequences)**
+* **Genus-level representatives (~700 sequences)**
 * **Species-level representatives (~3000 sequences)**
 
 Initial analyses attempted to use **Phylogenetic Generalized Least Squares (PGLS)**.
