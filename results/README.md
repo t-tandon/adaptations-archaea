@@ -15,7 +15,6 @@ Class-level analysis shows:
 * More modest/noisy patterns in small classes.
 * **frac_ilvwygerkp** still gives consistent positive slopes
 
----
 
 ## 2. Phylogenetic Signal in Traits
 
@@ -31,12 +30,8 @@ Class-level analysis shows:
 
 
 * **OGT is highly phylogenetically conserved** (λ ≈ 0.99).
-* Proteome composition traits show non-Brownian evolutionary dynamics.
-* Many molecular traits show early divergence patterns (EB or low δ), which might mean rapid early adaptation followed by constraint.
+* Many molecular traits show early divergence patterns, which might mean rapid early adaptation followed by constraint.
 
-This means that thermophily is structured by lineage, but biochemical optimization evolves dynamically within clades.
-
----
 
 ## 3. Per-Phylum GLS Results
 
