@@ -1,16 +1,6 @@
 # Results Summary
 
-This study investigates genomic and proteomic predictors of optimal growth temperature (OGT) across archaeal species using:
-
-* Per-phylum and per-class comparative models
-* Evolutionary model fitting (BM, EB, λ, κ, δ, white noise)
-* Ancestral state reconstruction
-
-All analyses were conducted on a curated dataset of one representative genome per species, ensuring independence at the species level.
-
----
-
-# 1. Exploratory Patterns
+## 1. Exploratory Patterns
 
 Across major archaeal phyla:
 
@@ -28,7 +18,7 @@ Class-level stratification shows:
 
 ---
 
-# 2. Phylogenetic Signal in Traits
+## 2. Phylogenetic Signal in Traits
 
 
 | Trait               | Best Model | Key Parameter | Interpretation                             |
@@ -49,7 +39,7 @@ This means that thermophily is structured by lineage, but biochemical optimizati
 
 ---
 
-# 3. Per-Phylum GLS Results
+## 3. Per-Phylum GLS Results
 
 Across phyla with enough statistical power:
 
@@ -82,7 +72,7 @@ These variables sometimes show clade-specific and are not consistent predictors 
 
 ---
 
-# 4. Per-Class Analysis
+## 4. Per-Class Analysis
 
 At the class level:
 
